@@ -1,0 +1,10 @@
+{
+  "extensionName": {
+    "message": "网页自动截屏助手",
+    "description": "扩展名称"
+  },
+  "extensionDescription": {
+    "message": "定时自动截屏保存 Chrome 网页,支持可见区域与整页长图两种模式",
+    "description": "扩展描述"
+  }
+}

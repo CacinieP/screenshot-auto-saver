@@ -1,0 +1,14 @@
+# 操作系统
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# 编辑器
+.vscode/
+.idea/
+*.iml
+
+# 日志与临时文件
+*.log
+.tmp/

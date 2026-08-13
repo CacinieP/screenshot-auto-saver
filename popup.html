@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>网页自动截屏助手</title>
+  <style>
+    :root { color-scheme: light; }
+    body {
+      width: 320px;
+      margin: 0;
+      padding: 14px 16px 16px;
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #fafbfc;
+      color: #1a1a1a;
+    }
+    h1 {
+      font-size: 16px;
+      margin: 0 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #d0d0d0;
+    }
+    .dot.on { background: #4caf50; box-shadow: 0 0 6px rgba(76,175,80,.5); }
+    .row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 10px; font-size: 13px;
+    }
+    .switch {
+      position: relative;
+      width: 40px; height: 22px;
+      background: #d0d0d0;
+      border-radius: 11px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .switch.on { background: #4caf50; }
+    .switch::after {
+      content: '';
+      position: absolute;
+      top: 2px; left: 2px;
+      width: 18px; height: 18px;
+      background: white;
+      border-radius: 50%;
+      transition: left .2s;
+    }
+    .switch.on::after { left: 20px; }
+    label { color: #444; }
+
+    select, input[type="number"] {
+      padding: 4px 8px; font-size: 13px;
+      border: 1px solid #d0d0d0; border-radius: 6px;
+      background: white; color: #1a1a1a;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: none; border-radius: 6px;
+      background: #1a73e8; color: white;
+      cursor: pointer; margin-top: 8px;
+      font-weight: 500;
+    }
+    .btn:hover { background: #1557b0; }
+    .btn.secondary { background: #f1f3f4; color: #1a1a1a; }
+    .btn.secondary:hover { background: #e1e3e6; }
+
+    .status {
+      font-size: 12px; color: #666;
+      padding: 8px 10px;
+      background: #f1f3f4;
+      border-radius: 6px;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+    .status strong { color: #1a1a1a; }
+    a.link {
+      display: block; text-align: center;
+      margin-top: 10px;
+      color: #1a73e8; font-size: 12px;
+      text-decoration: none;
+    }
+    a.link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <h1><span id="dot" class="dot"></span> 网页自动截屏助手</h1>
+
+  <div class="row">
+    <label for="enabled">启用定时截屏</label>
+    <div id="enabled" class="switch"></div>
+  </div>
+
+  <div class="row">
+    <label for="interval">间隔(分钟)</label>
+    <input id="interval" type="number" min="1" max="1440" value="5" />
+  </div>
+
+  <div class="row">
+    <label for="mode">截屏范围</label>
+    <select id="mode">
+      <option value="visible">仅可见区域</option>
+      <option value="fullpage">整页滚动</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <label for="format">图片格式</label>
+    <select id="format">
+      <option value="png">PNG</option>
+      <option value="jpeg">JPEG</option>
+      <option value="webp">WebP</option>
+    </select>
+  </div>
+
+  <button id="captureNow" class="btn">📷 立即截取当前页</button>
+  <button id="openOptions" class="btn secondary">⚙️ 高级设置</button>
+
+  <div class="status">
+    <div>状态: <strong id="stateText">未启动</strong></div>
+    <div>上次截屏: <strong id="lastTime">从未</strong></div>
+  </div>
+
+  <a class="link" id="openFolder" href="#">📂 打开下载文件夹</a>
+
+  <script src="popup.js"></script>
+</body>
+</html>

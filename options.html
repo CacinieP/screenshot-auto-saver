@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>高级设置 - 网页自动截屏助手</title>
+  <style>
+    :root { color-scheme: light; }
+    body {
+      max-width: 720px; margin: 24px auto; padding: 0 24px 32px;
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #fafbfc; color: #1a1a1a; line-height: 1.5;
+    }
+    h1 { font-size: 22px; margin-bottom: 8px; }
+    h2 { font-size: 16px; margin: 24px 0 12px; padding-bottom: 6px; border-bottom: 1px solid #e1e3e6; }
+    .field { margin: 12px 0; display: flex; align-items: center; gap: 12px; font-size: 14px; }
+    .field label { width: 180px; color: #444; }
+    .field input[type="text"], .field input[type="number"], .field select {
+      flex: 1; padding: 8px 10px; font-size: 14px;
+      border: 1px solid #d0d0d0; border-radius: 6px; background: white;
+    }
+    .field input[type="checkbox"] { transform: scale(1.2); }
+    .hint { font-size: 12px; color: #888; margin: 4px 0 0 192px; }
+    .vars {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 12px; color: #666;
+      background: #f1f3f4; padding: 8px 12px;
+      border-radius: 6px; margin: 8px 0 0 192px;
+    }
+    button {
+      padding: 10px 20px; font-size: 14px;
+      border: none; border-radius: 6px;
+      background: #1a73e8; color: white; cursor: pointer; margin-right: 8px;
+    }
+    button:hover { background: #1557b0; }
+    button.secondary { background: #f1f3f4; color: #1a1a1a; }
+    .toast {
+      position: fixed; bottom: 24px; left: 50%;
+      transform: translateX(-50%);
+      background: #1a1a1a; color: white;
+      padding: 10px 20px; border-radius: 6px; font-size: 13px;
+      opacity: 0; transition: opacity .2s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <h1>⚙️ 高级设置</h1>
+  <p style="color:#666">配置网页自动截屏助手的所有选项。修改后请点击保存。</p>
+
+  <h2>基本</h2>
+  <div class="field">
+    <label>启动浏览器时自动开始</label>
+    <input id="startWithBrowser" type="checkbox" />
+  </div>
+  <div class="field">
+    <label>截屏后显示通知</label>
+    <input id="notifyOnCapture" type="checkbox" />
+  </div>
+  <div class="field">
+    <label>截屏间隔(分钟)</label>
+    <input id="intervalMinutes" type="number" min="1" max="1440" />
+  </div>
+
+  <h2>范围</h2>
+  <div class="field">
+    <label>截取范围</label>
+    <select id="captureMode">
+      <option value="visible">仅可见区域(快)</option>
+      <option value="fullpage">整页长图(滚动拼接)</option>
+    </select>
+  </div>
+  <div class="hint">整页长图:会自动滚动整页并拼成一张图,适合长文章/聊天记录。</div>
+
+  <div class="field">
+    <label>仅截取当前激活标签</label>
+    <input id="onlyActiveTab" type="checkbox" />
+  </div>
+  <div class="field">
+    <label>跳过已固定的标签页</label>
+    <input id="skipPinnedTabs" type="checkbox" />
+  </div>
+
+  <h2>长图参数</h2>
+  <div class="field">
+    <label>分段重叠像素</label>
+    <input id="fullPageOverlap" type="number" min="0" max="500" />
+  </div>
+  <div class="hint">相邻两段重叠的像素数,0-500。建议 50-200,有助于消除 fixed 元素重复。</div>
+
+  <div class="field">
+    <label>最大高度(像素)</label>
+    <input id="fullPageMaxHeight" type="number" min="1000" max="100000" />
+  </div>
+  <div class="hint">超过此高度只截顶部,避免超大图导致内存不足。建议 10000-30000。</div>
+
+  <h2>输出</h2>
+  <div class="field">
+    <label>图片格式</label>
+    <select id="format">
+      <option value="png">PNG(无损)</option>
+      <option value="jpeg">JPEG(体积小)</option>
+      <option value="webp">WebP</option>
+    </select>
+  </div>
+  <div class="field">
+    <label>JPEG/WebP 质量</label>
+    <input id="jpegQuality" type="number" min="1" max="100" />
+  </div>
+  <div class="field">
+    <label>保存子目录(可选)</label>
+    <input id="savePath" type="text" placeholder="例如: Screenshots" />
+  </div>
+  <div class="hint">Chrome 仅允许在默认下载目录下设子目录。</div>
+  <div class="field">
+    <label>文件命名规则</label>
+    <input id="fileNamePattern" type="text" />
+  </div>
+  <div class="vars">
+    {domain} 域名 · {title} 标题 · {date} 日期 · {time} 时间 · {path} 路径
+  </div>
+
+  <h2>操作</h2>
+  <div style="margin-left: 192px; margin-top: 16px;">
+    <button id="save">💾 保存</button>
+    <button id="reset" class="secondary">↺ 恢复默认</button>
+  </div>
+
+  <div id="toast" class="toast">已保存</div>
+  <script src="options.js"></script>
+</body>
+</html>
