@@ -1,42 +1,64 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-i18n-document-title="optionsDocumentTitle">
 <head>
   <meta charset="UTF-8" />
   <title>高级设置 - 网页自动截屏助手</title>
   <style>
-    :root { color-scheme: light; }
+    :root {
+      color-scheme: light;
+      --paper: #f4f0e8;
+      --paper-bright: #fbf8f2;
+      --ink: #14262b;
+      --ink-soft: #244c57;
+      --line: rgba(20, 38, 43, .2);
+      --aqua: #69c8bd;
+      --aqua-soft: #b9e2da;
+      --coral: #e9795f;
+      --muted: #687578;
+    }
     body {
       max-width: 720px; margin: 24px auto; padding: 0 24px 32px;
       font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
-      background: #fafbfc; color: #1a1a1a; line-height: 1.5;
+      background: var(--paper-bright); color: var(--ink); line-height: 1.5;
     }
-    h1 { font-size: 22px; margin-bottom: 8px; }
-    h2 { font-size: 16px; margin: 24px 0 12px; padding-bottom: 6px; border-bottom: 1px solid #e1e3e6; }
+    h1 { display: flex; align-items: center; gap: 10px; font-size: 22px; margin-bottom: 8px; }
+    h1 img { width: 34px; height: 34px; }
+    h2 { font-size: 16px; margin: 24px 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+    .intro { color: var(--muted); }
     .field { margin: 12px 0; display: flex; align-items: center; gap: 12px; font-size: 14px; }
-    .field label { width: 180px; color: #444; }
+    .field label { width: 180px; color: var(--ink-soft); }
     .field input[type="text"], .field input[type="number"], .field select {
       flex: 1; padding: 8px 10px; font-size: 14px;
-      border: 1px solid #d0d0d0; border-radius: 6px; background: white;
+      border: 1px solid var(--line); border-radius: 6px; background: var(--paper-bright); color: var(--ink);
     }
-    .field input[type="checkbox"] { transform: scale(1.2); }
-    .hint { font-size: 12px; color: #888; margin: 4px 0 0 192px; }
+    .field input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--aqua); }
+    .hint { font-size: 12px; color: var(--muted); margin: 4px 0 0 192px; }
     .vars {
       font-family: ui-monospace, "SF Mono", Menlo, monospace;
-      font-size: 12px; color: #666;
-      background: #f1f3f4; padding: 8px 12px;
+      font-size: 12px; color: var(--ink-soft);
+      background: var(--paper); padding: 8px 12px;
+      border: 1px solid var(--line);
       border-radius: 6px; margin: 8px 0 0 192px;
     }
     button {
       padding: 10px 20px; font-size: 14px;
       border: none; border-radius: 6px;
-      background: #1a73e8; color: white; cursor: pointer; margin-right: 8px;
+      background: var(--ink); color: var(--paper-bright); cursor: pointer; margin-right: 8px;
     }
-    button:hover { background: #1557b0; }
-    button.secondary { background: #f1f3f4; color: #1a1a1a; }
+    button:hover { background: var(--ink-soft); }
+    button.secondary { background: var(--aqua-soft); color: var(--ink); }
+    button.secondary:hover { background: var(--aqua); }
+    button:focus-visible,
+    select:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--coral);
+      outline-offset: 2px;
+    }
+    .actions { margin-inline-start: 192px; margin-top: 16px; }
     .toast {
       position: fixed; bottom: 24px; left: 50%;
       transform: translateX(-50%);
-      background: #1a1a1a; color: white;
+      background: var(--ink); color: var(--paper-bright);
       padding: 10px 20px; border-radius: 6px; font-size: 13px;
       opacity: 0; transition: opacity .2s; pointer-events: none;
     }
@@ -44,58 +66,58 @@
   </style>
 </head>
 <body>
-  <h1>⚙️ 高级设置</h1>
-  <p style="color:#666">配置网页自动截屏助手的所有选项。修改后请点击保存。</p>
+  <h1><img src="icons/icon48.png" alt="" /><span data-i18n="advancedSettings">高级设置</span></h1>
+  <p class="intro" data-i18n="optionsIntro">配置网页自动截屏助手的所有选项。修改后请点击保存。</p>
 
-  <h2>基本</h2>
+  <h2 data-i18n="basicSection">基本</h2>
   <div class="field">
-    <label>启动浏览器时自动开始</label>
+    <label for="startWithBrowser" data-i18n="startWithBrowser">启动浏览器时自动开始</label>
     <input id="startWithBrowser" type="checkbox" />
   </div>
   <div class="field">
-    <label>截屏后显示通知</label>
+    <label for="notifyOnCapture" data-i18n="notifyOnCapture">截屏后显示通知</label>
     <input id="notifyOnCapture" type="checkbox" />
   </div>
   <div class="field">
-    <label>截屏间隔(分钟)</label>
+    <label for="intervalMinutes" data-i18n="captureIntervalMinutes">截屏间隔(分钟)</label>
     <input id="intervalMinutes" type="number" min="1" max="1440" />
   </div>
 
-  <h2>范围</h2>
+  <h2 data-i18n="scopeSection">范围</h2>
   <div class="field">
-    <label>截取范围</label>
+    <label for="captureMode" data-i18n="captureScope">截取范围</label>
     <select id="captureMode">
-      <option value="visible">仅可见区域(快)</option>
-      <option value="fullpage">整页长图(滚动拼接)</option>
+      <option value="visible" data-i18n="visibleAreaFast">仅可见区域(快)</option>
+      <option value="fullpage" data-i18n="fullPageScrolling">整页长图(滚动拼接)</option>
     </select>
   </div>
-  <div class="hint">整页长图:会自动滚动整页并拼成一张图,适合长文章/聊天记录。</div>
+  <div class="hint" data-i18n="fullPageHint">整页长图:会自动滚动整页并拼成一张图,适合长文章/聊天记录。</div>
 
   <div class="field">
-    <label>仅截取当前激活标签</label>
+    <label for="onlyActiveTab" data-i18n="onlyActiveTab">仅截取当前激活标签</label>
     <input id="onlyActiveTab" type="checkbox" />
   </div>
   <div class="field">
-    <label>跳过已固定的标签页</label>
+    <label for="skipPinnedTabs" data-i18n="skipPinnedTabs">跳过已固定的标签页</label>
     <input id="skipPinnedTabs" type="checkbox" />
   </div>
 
-  <h2>长图参数</h2>
+  <h2 data-i18n="fullPageParameters">长图参数</h2>
   <div class="field">
-    <label>分段重叠像素</label>
+    <label for="fullPageOverlap" data-i18n="overlapPixels">分段重叠像素</label>
     <input id="fullPageOverlap" type="number" min="0" max="500" />
   </div>
-  <div class="hint">相邻两段重叠的像素数,0-500。建议 50-200,有助于消除 fixed 元素重复。</div>
+  <div class="hint" data-i18n="overlapHint">相邻两段重叠的像素数,0-500。建议 50-200,有助于消除 fixed 元素重复。</div>
 
   <div class="field">
-    <label>最大高度(像素)</label>
+    <label for="fullPageMaxHeight" data-i18n="maxHeightPixels">最大高度(像素)</label>
     <input id="fullPageMaxHeight" type="number" min="1000" max="100000" />
   </div>
-  <div class="hint">超过此高度只截顶部,避免超大图导致内存不足。建议 10000-30000。</div>
+  <div class="hint" data-i18n="maxHeightHint">超过此高度只截顶部,避免超大图导致内存不足。建议 10000-30000。</div>
 
-  <h2>输出</h2>
+  <h2 data-i18n="outputSection">输出</h2>
   <div class="field">
-    <label>图片格式</label>
+    <label for="format" data-i18n="imageFormat">图片格式</label>
     <select id="format">
       <option value="png">PNG(无损)</option>
       <option value="jpeg">JPEG(体积小)</option>
@@ -103,29 +125,30 @@
     </select>
   </div>
   <div class="field">
-    <label>JPEG/WebP 质量</label>
+    <label for="jpegQuality" data-i18n="imageQuality">JPEG/WebP 质量</label>
     <input id="jpegQuality" type="number" min="1" max="100" />
   </div>
   <div class="field">
-    <label>保存子目录(可选)</label>
-    <input id="savePath" type="text" placeholder="例如: Screenshots" />
+    <label for="savePath" data-i18n="saveSubfolder">保存子目录(可选)</label>
+    <input id="savePath" type="text" placeholder="例如: Screenshots" data-i18n-placeholder="savePathPlaceholder" />
   </div>
-  <div class="hint">Chrome 仅允许在默认下载目录下设子目录。</div>
+  <div class="hint" data-i18n="downloadSubfolderHint">Chrome 仅允许在默认下载目录下设子目录。</div>
   <div class="field">
-    <label>文件命名规则</label>
+    <label for="fileNamePattern" data-i18n="fileNamePattern">文件命名规则</label>
     <input id="fileNamePattern" type="text" />
   </div>
   <div class="vars">
-    {domain} 域名 · {title} 标题 · {date} 日期 · {time} 时间 · {path} 路径
+    <span data-i18n="filenameVariables">{domain} 域名 · {title} 标题 · {date} 日期 · {time} 时间 · {path} 路径</span>
   </div>
 
-  <h2>操作</h2>
-  <div style="margin-left: 192px; margin-top: 16px;">
-    <button id="save">💾 保存</button>
-    <button id="reset" class="secondary">↺ 恢复默认</button>
+  <h2 data-i18n="actionsSection">操作</h2>
+  <div class="actions">
+    <button id="save" data-i18n="saveSettings">保存</button>
+    <button id="reset" class="secondary" data-i18n="resetDefaults">恢复默认</button>
   </div>
 
-  <div id="toast" class="toast">已保存</div>
+  <div id="toast" class="toast" data-i18n="savedSettings">已保存</div>
+  <script src="i18n.js"></script>
   <script src="options.js"></script>
 </body>
 </html>

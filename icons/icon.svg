@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Cace Capture</title>
+  <desc id="desc">A C-shaped capture lens with an active status dot, using the linguistwantstech brand palette.</desc>
+
+  <rect width="512" height="512" rx="112" fill="#f4f0e8"/>
+  <rect x="42" y="42" width="428" height="428" rx="90" fill="#b9e2da" stroke="#14262b" stroke-width="24"/>
+
+  <!-- C = Cace + capture. The open lens silhouette stays legible at toolbar size. -->
+  <path
+    d="M39 23c-2-4-6-6-11-6-8 0-14 6-14 15s6 15 14 15c5 0 9-2 12-6l-5-5c-2 2-4 3-7 3-4 0-7-3-7-7s3-7 7-7c3 0 5 1 7 3l4-5Z"
+    fill="#14262b"
+    transform="translate(38) scale(8)"
+  />
+
+  <!-- Viewfinder center. -->
+  <rect x="216" y="216" width="80" height="80" rx="22" fill="#f4f0e8" stroke="#14262b" stroke-width="18"/>
+
+  <!-- Brand status dot: automatic capture is active. -->
+  <circle cx="392" cy="120" r="42" fill="#e9795f" stroke="#14262b" stroke-width="18"/>
+</svg>

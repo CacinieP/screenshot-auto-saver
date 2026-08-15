@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 280" role="img" aria-labelledby="title desc">
+  <title id="title">Auto Screenshot Saver promotional tile</title>
+  <desc id="desc">An original brand illustration of webpage panels being captured and saved locally.</desc>
+  <rect x="0" y="0" width="440" height="280" fill="#f4f0e8"/>
+  <circle cx="420" cy="-4" r="104" fill="#efb09e" fill-opacity=".42"/>
+  <circle cx="20" cy="274" r="116" fill="#b9e2da" fill-opacity=".74"/>
+
+  <g transform="translate(54 32)">
+    <rect x="12" y="14" width="176" height="214" fill="#14262b" opacity=".18"/>
+    <rect width="176" height="214" rx="10" fill="#fbf8f2" stroke="#14262b" stroke-width="4"/>
+    <rect width="176" height="30" rx="8" fill="#b9e2da"/>
+    <path d="M0 30H176" stroke="#14262b" stroke-width="3"/>
+    <circle cx="16" cy="15" r="4" fill="#e9795f"/>
+    <circle cx="29" cy="15" r="4" fill="#efc75e"/>
+    <circle cx="42" cy="15" r="4" fill="#69c8bd"/>
+    <rect x="20" y="52" width="88" height="10" rx="5" fill="#14262b"/>
+    <rect x="20" y="76" width="136" height="5" rx="2.5" fill="#244c57" opacity=".26"/>
+    <rect x="20" y="90" width="118" height="5" rx="2.5" fill="#244c57" opacity=".26"/>
+    <rect x="20" y="112" width="40" height="56" fill="#b9e2da" stroke="#14262b" stroke-opacity=".2"/>
+    <rect x="68" y="112" width="40" height="56" fill="#efc75e" fill-opacity=".55" stroke="#14262b" stroke-opacity=".2"/>
+    <rect x="116" y="112" width="40" height="56" fill="#efb09e" fill-opacity=".64" stroke="#14262b" stroke-opacity=".2"/>
+    <rect x="20" y="188" width="136" height="5" rx="2.5" fill="#244c57" opacity=".26"/>
+  </g>
+
+  <g transform="translate(264 48)">
+    <rect x="8" y="10" width="126" height="172" rx="22" fill="#14262b" opacity=".18"/>
+    <rect width="126" height="172" rx="22" fill="#b9e2da" stroke="#14262b" stroke-width="6"/>
+    <path d="M39 57c-6-10-16-16-29-16-22 0-39 16-39 40s17 40 39 40c14 0 25-6 32-16L28 92c-5 5-11 8-18 8-11 0-19-8-19-19s8-19 19-19c7 0 13 3 18 8l11-13Z" fill="#14262b" transform="translate(48 4) scale(.9)"/>
+    <rect x="55" y="75" width="24" height="24" rx="7" fill="#f4f0e8" stroke="#14262b" stroke-width="5"/>
+    <circle cx="99" cy="34" r="13" fill="#e9795f" stroke="#14262b" stroke-width="5"/>
+  </g>
+
+  <path d="M221 140h35" stroke="#14262b" stroke-width="4" stroke-dasharray="5 8"/>
+  <path d="m248 132 9 8-9 8" fill="none" stroke="#14262b" stroke-width="4"/>
+</svg>

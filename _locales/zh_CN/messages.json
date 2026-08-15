@@ -1,10 +1,80 @@
 {
-  "extensionName": {
-    "message": "网页自动截屏助手",
-    "description": "扩展名称"
+  "extensionName": { "message": "网页自动截屏助手", "description": "扩展名称" },
+  "extensionShortName": { "message": "自动截屏", "description": "空间不足时显示的短名称" },
+  "extensionDescription": { "message": "定时自动截屏保存 Chrome 网页，支持可见区域与整页长图两种模式", "description": "扩展描述" },
+  "enableScheduledCapture": { "message": "启用定时截屏" },
+  "intervalMinutes": { "message": "间隔（分钟）" },
+  "captureIntervalMinutes": { "message": "截屏间隔（分钟）" },
+  "captureScope": { "message": "截屏范围" },
+  "visibleArea": { "message": "仅可见区域" },
+  "fullPage": { "message": "整页滚动" },
+  "visibleAreaFast": { "message": "仅可见区域（快）" },
+  "fullPageScrolling": { "message": "整页长图（滚动拼接）" },
+  "imageFormat": { "message": "图片格式" },
+  "captureNow": { "message": "立即截取当前页" },
+  "advancedSettings": { "message": "高级设置" },
+  "statusLabel": { "message": "状态：" },
+  "lastCaptureLabel": { "message": "上次截屏：" },
+  "notStarted": { "message": "未启动" },
+  "running": { "message": "运行中" },
+  "never": { "message": "从未" },
+  "openDownloadFolder": { "message": "打开下载文件夹" },
+  "capturing": { "message": "截取中…" },
+  "fullPageCapturing": { "message": "长图截取中…" },
+  "saved": { "message": "已保存" },
+  "captureFailed": {
+    "message": "截屏失败：$ERROR$\n\n请打开扩展页查看详细日志（chrome://extensions → 详情 → 检查视图）。",
+    "placeholders": { "error": { "content": "$1" } }
   },
-  "extensionDescription": {
-    "message": "定时自动截屏保存 Chrome 网页,支持可见区域与整页长图两种模式",
-    "description": "扩展描述"
-  }
+  "optionsDocumentTitle": { "message": "高级设置 - 网页自动截屏助手" },
+  "optionsIntro": { "message": "配置网页自动截屏助手的所有选项。修改后请点击保存。" },
+  "basicSection": { "message": "基本" },
+  "startWithBrowser": { "message": "启动浏览器时自动开始" },
+  "notifyOnCapture": { "message": "截屏后显示通知" },
+  "scopeSection": { "message": "范围" },
+  "fullPageHint": { "message": "整页长图会自动滚动并拼成一张图，适合长文章与聊天记录。" },
+  "onlyActiveTab": { "message": "仅截取当前激活标签" },
+  "skipPinnedTabs": { "message": "跳过已固定的标签页" },
+  "fullPageParameters": { "message": "长图参数" },
+  "overlapPixels": { "message": "分段重叠像素" },
+  "overlapHint": { "message": "相邻两段重叠的像素数（0–500）。建议 50–200，有助于消除 fixed 元素重复。" },
+  "maxHeightPixels": { "message": "最大高度（像素）" },
+  "maxHeightHint": { "message": "超过此高度只截顶部，避免超大图导致内存不足。建议 10000–30000。" },
+  "outputSection": { "message": "输出" },
+  "imageQuality": { "message": "JPEG/WebP 质量" },
+  "saveSubfolder": { "message": "保存子目录（可选）" },
+  "savePathPlaceholder": { "message": "例如：Screenshots" },
+  "downloadSubfolderHint": { "message": "Chrome 仅允许在默认下载目录下设置子目录。" },
+  "fileNamePattern": { "message": "文件命名规则" },
+  "filenameVariables": { "message": "{domain} 域名 · {title} 标题 · {date} 日期 · {time} 时间 · {path} 路径" },
+  "actionsSection": { "message": "操作" },
+  "saveSettings": { "message": "保存" },
+  "resetDefaults": { "message": "恢复默认" },
+  "savedSettings": { "message": "已保存" },
+  "confirmReset": { "message": "确定恢复所有选项为默认值？" },
+  "restoredDefaults": { "message": "已恢复默认" },
+  "notificationTitle": { "message": "截屏已保存" },
+  "unknownError": { "message": "未知错误" },
+  "unknownAction": { "message": "未知操作" },
+  "pageSizeUnavailable": { "message": "无法获取页面尺寸" },
+  "scrollFailed": {
+    "message": "滚动失败：$ERROR$",
+    "placeholders": { "error": { "content": "$1" } }
+  },
+  "emptyCapture": { "message": "浏览器未返回截图数据" },
+  "noSegmentsCaptured": { "message": "未截到任何分段" },
+  "offscreenCanvasUnavailable": { "message": "当前 Chrome 不支持 OffscreenCanvas，无法拼接长图" },
+  "canvasLimitExceeded": {
+    "message": "拼接尺寸 $SIZE$ 超过 Chrome 画布限制。请在高级设置中调小“最大高度”，或缩小浏览器窗口宽度。",
+    "placeholders": { "size": { "content": "$1" } }
+  },
+  "segmentStitchFailed": {
+    "message": "第 $INDEX$ 段拼接失败：$ERROR$",
+    "placeholders": {
+      "index": { "content": "$1" },
+      "error": { "content": "$2" }
+    }
+  },
+  "imageConversionFailed": { "message": "图片转换失败，可能是图片太大或格式不支持" },
+  "activeTabNotFound": { "message": "未找到可截取的标签页" }
 }

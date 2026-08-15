@@ -35,6 +35,10 @@ const DEFAULT_CONFIG = {
   lastCaptureTime: 0
 };
 
+function t(key, substitutions) {
+  return chrome.i18n.getMessage(key, substitutions) || key;
+}
+
 async function getConfig() {
   const result = await chrome.storage.sync.get(DEFAULT_CONFIG);
   return { ...DEFAULT_CONFIG, ...result };
@@ -126,7 +130,7 @@ async function captureTab(tab, cfg) {
     chrome.notifications.create({
       type: 'basic',
       iconUrl: 'icons/icon128.png',
-      title: '截屏已保存',
+      title: t('notificationTitle'),
       message: tab.title || tab.url
     });
   }
@@ -215,7 +219,7 @@ async function captureFullPage(tab, cfg) {
   // 1. 准备 + 获取页面几何
   const { metrics } = await sendToTab(tab.id, { action: 'prepareCapture' });
   if (!metrics || !metrics.scrollHeight) {
-    throw new Error('无法获取页面尺寸');
+    throw new Error(t('pageSizeUnavailable'));
   }
 
   try {
@@ -237,12 +241,12 @@ async function captureFullPage(tab, cfg) {
     while (y < totalH) {
       // 把 content script 滚动到目标位置
       const r = await sendToTab(tab.id, { action: 'scrollTo', x: 0, y });
-      if (!r.ok) throw new Error('滚动失败: ' + (r.error || 'unknown'));
+      if (!r.ok) throw new Error(t('scrollFailed', r.error || t('unknownError')));
       await sleep(150);  // 等待滚动 + 重排完成
 
       // 受限流器保护的截屏(每秒最多 ~1.6 次)
       const dataUrl = await captureThrottle.exec(tab.windowId, { format: 'png' });
-      if (!dataUrl) throw new Error('captureVisibleTab 返回空');
+      if (!dataUrl) throw new Error(t('emptyCapture'));
 
       // 浏览器会把滚动位置钳制在 maxScroll 以内,以实际位置为准,
       // 否则最后一段会画到错误位置且被压扁
@@ -260,7 +264,7 @@ async function captureFullPage(tab, cfg) {
     }
 
     if (segments.length === 0) {
-      throw new Error('未截到任何分段');
+      throw new Error(t('noSegmentsCaptured'));
     }
 
     // 3. 拼接
@@ -338,7 +342,7 @@ function blobToDataURL(blob) {
  */
 async function stitchSegments(segments, totalW, totalH, cfg, viewportH, devicePixelRatio) {
   if (typeof OffscreenCanvas === 'undefined') {
-    throw new Error('当前 Chrome 不支持 OffscreenCanvas,无法拼接长图');
+    throw new Error(t('offscreenCanvasUnavailable'));
   }
 
   // Chrome 画布限制:单边最大 65535,总面积约 16384²(2^28 像素)。
@@ -352,9 +356,7 @@ async function stitchSegments(segments, totalW, totalH, cfg, viewportH, devicePi
   if (overLimit(scale)) {
     scale = 1;
     if (overLimit(1)) {
-      throw new Error(
-        `拼接尺寸 ${totalW}x${totalH} 超过 Chrome 画布限制,请在高级设置中调小"最大高度",或缩小浏览器窗口宽度`
-      );
+      throw new Error(t('canvasLimitExceeded', [`${totalW}x${totalH}`]));
     }
   }
 
@@ -376,7 +378,7 @@ async function stitchSegments(segments, totalW, totalH, cfg, viewportH, devicePi
       bitmap.close && bitmap.close();
       console.log(`[AutoCapture] 拼接段 ${i + 1}/${segments.length}`);
     } catch (err) {
-      throw new Error(`第 ${i + 1} 段拼接失败: ${err.message}`);
+      throw new Error(t('segmentStitchFailed', [String(i + 1), err.message]));
     }
   }
 
@@ -392,7 +394,7 @@ async function stitchSegments(segments, totalW, totalH, cfg, viewportH, devicePi
 
   const blob = await canvas.convertToBlob({ type: outType, quality });
   if (!blob || blob.size === 0) {
-    throw new Error('convertToBlob 返回空,可能是图片太大或格式不支持');
+    throw new Error(t('imageConversionFailed'));
   }
   return blob;
 }
@@ -472,7 +474,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
           sendResponse({ ok: true });
           break;
         default:
-          sendResponse({ ok: false, error: 'unknown action' });
+          sendResponse({ ok: false, error: t('unknownAction') });
       }
     } catch (err) {
       console.error('[AutoCapture]', err);
@@ -485,6 +487,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 async function getActiveTab() {
   // service worker 中 currentWindow 不可靠,应使用 lastFocusedWindow
   const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
-  if (!tab) throw new Error('未找到可截取的标签页');
+  if (!tab) throw new Error(t('activeTabNotFound'));
   return tab;
 }

@@ -1,30 +1,44 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-i18n-document-title="extensionName">
 <head>
   <meta charset="UTF-8" />
   <title>网页自动截屏助手</title>
   <style>
-    :root { color-scheme: light; }
+    :root {
+      color-scheme: light;
+      --paper: #f4f0e8;
+      --paper-bright: #fbf8f2;
+      --ink: #14262b;
+      --ink-soft: #244c57;
+      --line: rgba(20, 38, 43, .2);
+      --aqua: #69c8bd;
+      --aqua-soft: #b9e2da;
+      --coral: #e9795f;
+      --muted: #687578;
+    }
     body {
       width: 320px;
       margin: 0;
       padding: 14px 16px 16px;
       font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
-      background: #fafbfc;
-      color: #1a1a1a;
+      background: var(--paper-bright);
+      color: var(--ink);
     }
     h1 {
       font-size: 16px;
       margin: 0 0 12px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      letter-spacing: .01em;
     }
+    .app-icon { width: 26px; height: 26px; }
     .dot {
       width: 8px; height: 8px; border-radius: 50%;
-      background: #d0d0d0;
+      margin-inline-start: auto;
+      background: var(--muted);
     }
-    .dot.on { background: #4caf50; box-shadow: 0 0 6px rgba(76,175,80,.5); }
+    .dot.on { background: var(--coral); box-shadow: 0 0 0 4px rgba(233,121,95,.14); }
     .row {
       display: flex; align-items: center; justify-content: space-between;
       margin-bottom: 10px; font-size: 13px;
@@ -32,28 +46,36 @@
     .switch {
       position: relative;
       width: 40px; height: 22px;
-      background: #d0d0d0;
+      background: rgba(104, 117, 120, .35);
       border-radius: 11px;
       cursor: pointer;
       transition: background .2s;
     }
-    .switch.on { background: #4caf50; }
+    .switch.on { background: var(--aqua); }
     .switch::after {
       content: '';
       position: absolute;
       top: 2px; left: 2px;
       width: 18px; height: 18px;
-      background: white;
+      background: var(--paper-bright);
       border-radius: 50%;
       transition: left .2s;
     }
     .switch.on::after { left: 20px; }
-    label { color: #444; }
+    .switch:focus-visible,
+    button:focus-visible,
+    select:focus-visible,
+    input:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--coral);
+      outline-offset: 2px;
+    }
+    label { color: var(--ink-soft); }
 
     select, input[type="number"] {
       padding: 4px 8px; font-size: 13px;
-      border: 1px solid #d0d0d0; border-radius: 6px;
-      background: white; color: #1a1a1a;
+      border: 1px solid var(--line); border-radius: 6px;
+      background: var(--paper-bright); color: var(--ink);
     }
 
     .btn {
@@ -61,55 +83,60 @@
       padding: 10px;
       font-size: 14px;
       border: none; border-radius: 6px;
-      background: #1a73e8; color: white;
+      background: var(--ink); color: var(--paper-bright);
       cursor: pointer; margin-top: 8px;
       font-weight: 500;
     }
-    .btn:hover { background: #1557b0; }
-    .btn.secondary { background: #f1f3f4; color: #1a1a1a; }
-    .btn.secondary:hover { background: #e1e3e6; }
+    .btn:hover { background: var(--ink-soft); }
+    .btn.secondary { background: var(--aqua-soft); color: var(--ink); }
+    .btn.secondary:hover { background: var(--aqua); }
 
     .status {
-      font-size: 12px; color: #666;
+      font-size: 12px; color: var(--muted);
       padding: 8px 10px;
-      background: #f1f3f4;
+      background: var(--paper);
+      border: 1px solid var(--line);
       border-radius: 6px;
       margin-top: 10px;
       line-height: 1.5;
     }
-    .status strong { color: #1a1a1a; }
+    .status strong { color: var(--ink); }
     a.link {
       display: block; text-align: center;
       margin-top: 10px;
-      color: #1a73e8; font-size: 12px;
+      color: var(--ink-soft); font-size: 12px;
       text-decoration: none;
     }
     a.link:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-  <h1><span id="dot" class="dot"></span> 网页自动截屏助手</h1>
+  <h1>
+    <img class="app-icon" src="icons/icon48.png" alt="" />
+    <span data-i18n="extensionName">网页自动截屏助手</span>
+    <span id="dot" class="dot" aria-hidden="true"></span>
+  </h1>
 
   <div class="row">
-    <label for="enabled">启用定时截屏</label>
-    <div id="enabled" class="switch"></div>
+    <label id="enabledLabel" data-i18n="enableScheduledCapture">启用定时截屏</label>
+    <div id="enabled" class="switch" role="switch" tabindex="0" aria-checked="false" aria-labelledby="enabledLabel"></div>
   </div>
 
   <div class="row">
-    <label for="interval">间隔(分钟)</label>
+    <label for="interval" data-i18n="intervalMinutes">间隔(分钟)</label>
     <input id="interval" type="number" min="1" max="1440" value="5" />
   </div>
 
   <div class="row">
-    <label for="mode">截屏范围</label>
+    <label for="mode" data-i18n="captureScope">截屏范围</label>
     <select id="mode">
-      <option value="visible">仅可见区域</option>
-      <option value="fullpage">整页滚动</option>
+      <option value="visible" data-i18n="visibleArea">仅可见区域</option>
+      <option value="fullpage" data-i18n="fullPage">整页滚动</option>
     </select>
   </div>
 
   <div class="row">
-    <label for="format">图片格式</label>
+    <label for="format" data-i18n="imageFormat">图片格式</label>
     <select id="format">
       <option value="png">PNG</option>
       <option value="jpeg">JPEG</option>
@@ -117,16 +144,17 @@
     </select>
   </div>
 
-  <button id="captureNow" class="btn">📷 立即截取当前页</button>
-  <button id="openOptions" class="btn secondary">⚙️ 高级设置</button>
+  <button id="captureNow" class="btn" data-i18n="captureNow">立即截取当前页</button>
+  <button id="openOptions" class="btn secondary" data-i18n="advancedSettings">高级设置</button>
 
   <div class="status">
-    <div>状态: <strong id="stateText">未启动</strong></div>
-    <div>上次截屏: <strong id="lastTime">从未</strong></div>
+    <div><span data-i18n="statusLabel">状态:</span> <strong id="stateText" data-i18n="notStarted">未启动</strong></div>
+    <div><span data-i18n="lastCaptureLabel">上次截屏:</span> <strong id="lastTime" data-i18n="never">从未</strong></div>
   </div>
 
-  <a class="link" id="openFolder" href="#">📂 打开下载文件夹</a>
+  <a class="link" id="openFolder" href="#" data-i18n="openDownloadFolder">打开下载文件夹</a>
 
+  <script src="i18n.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>

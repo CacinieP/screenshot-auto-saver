@@ -1,10 +1,80 @@
 {
-  "extensionName": {
-    "message": "Auto Screenshot Saver",
-    "description": "Extension name"
+  "extensionName": { "message": "Auto Screenshot Saver", "description": "Extension name" },
+  "extensionShortName": { "message": "Auto Capture", "description": "Short name shown when space is limited" },
+  "extensionDescription": { "message": "Automatically capture webpages on a schedule. Visible-area or full-page scrolling screenshots, saved locally. No tracking, no uploads.", "description": "Extension description" },
+  "enableScheduledCapture": { "message": "Enable scheduled capture" },
+  "intervalMinutes": { "message": "Interval (minutes)" },
+  "captureIntervalMinutes": { "message": "Capture interval (minutes)" },
+  "captureScope": { "message": "Capture scope" },
+  "visibleArea": { "message": "Visible area only" },
+  "fullPage": { "message": "Full page" },
+  "visibleAreaFast": { "message": "Visible area only (fast)" },
+  "fullPageScrolling": { "message": "Full page (scroll and stitch)" },
+  "imageFormat": { "message": "Image format" },
+  "captureNow": { "message": "Capture current page now" },
+  "advancedSettings": { "message": "Advanced settings" },
+  "statusLabel": { "message": "Status:" },
+  "lastCaptureLabel": { "message": "Last capture:" },
+  "notStarted": { "message": "Not running" },
+  "running": { "message": "Running" },
+  "never": { "message": "Never" },
+  "openDownloadFolder": { "message": "Open Downloads folder" },
+  "capturing": { "message": "Capturing…" },
+  "fullPageCapturing": { "message": "Capturing full page…" },
+  "saved": { "message": "Saved" },
+  "captureFailed": {
+    "message": "Screenshot failed: $ERROR$\n\nOpen the extension page for details (chrome://extensions → Details → Inspect views).",
+    "placeholders": { "error": { "content": "$1" } }
   },
-  "extensionDescription": {
-    "message": "Automatically capture webpages on a schedule. Visible-area or full-page scrolling screenshots, saved locally. No tracking, no uploads.",
-    "description": "Extension description"
-  }
+  "optionsDocumentTitle": { "message": "Advanced settings - Auto Screenshot Saver" },
+  "optionsIntro": { "message": "Configure every Auto Screenshot Saver option. Select Save when you are finished." },
+  "basicSection": { "message": "Basics" },
+  "startWithBrowser": { "message": "Start automatically with Chrome" },
+  "notifyOnCapture": { "message": "Show a notification after capture" },
+  "scopeSection": { "message": "Scope" },
+  "fullPageHint": { "message": "Full-page mode scrolls and stitches the page into one image—ideal for long articles and chat logs." },
+  "onlyActiveTab": { "message": "Capture the active tab only" },
+  "skipPinnedTabs": { "message": "Skip pinned tabs" },
+  "fullPageParameters": { "message": "Full-page options" },
+  "overlapPixels": { "message": "Segment overlap (pixels)" },
+  "overlapHint": { "message": "Overlap between adjacent segments (0–500). A value from 50–200 can reduce repeated fixed elements." },
+  "maxHeightPixels": { "message": "Maximum height (pixels)" },
+  "maxHeightHint": { "message": "Pages taller than this are captured from the top to avoid excessive memory use. Recommended: 10000–30000." },
+  "outputSection": { "message": "Output" },
+  "imageQuality": { "message": "JPEG/WebP quality" },
+  "saveSubfolder": { "message": "Save subfolder (optional)" },
+  "savePathPlaceholder": { "message": "For example: Screenshots" },
+  "downloadSubfolderHint": { "message": "Chrome only allows subfolders inside your default Downloads directory." },
+  "fileNamePattern": { "message": "Filename pattern" },
+  "filenameVariables": { "message": "{domain} domain · {title} title · {date} date · {time} time · {path} path" },
+  "actionsSection": { "message": "Actions" },
+  "saveSettings": { "message": "Save" },
+  "resetDefaults": { "message": "Restore defaults" },
+  "savedSettings": { "message": "Saved" },
+  "confirmReset": { "message": "Restore every option to its default value?" },
+  "restoredDefaults": { "message": "Defaults restored" },
+  "notificationTitle": { "message": "Screenshot saved" },
+  "unknownError": { "message": "Unknown error" },
+  "unknownAction": { "message": "Unknown action" },
+  "pageSizeUnavailable": { "message": "Could not determine the page size" },
+  "scrollFailed": {
+    "message": "Could not scroll the page: $ERROR$",
+    "placeholders": { "error": { "content": "$1" } }
+  },
+  "emptyCapture": { "message": "Chrome returned no screenshot data" },
+  "noSegmentsCaptured": { "message": "No page segments were captured" },
+  "offscreenCanvasUnavailable": { "message": "This Chrome version does not support OffscreenCanvas, so it cannot stitch a full-page image" },
+  "canvasLimitExceeded": {
+    "message": "The stitched size ($SIZE$) exceeds Chrome's canvas limit. Reduce Maximum height in Advanced settings or narrow the browser window.",
+    "placeholders": { "size": { "content": "$1" } }
+  },
+  "segmentStitchFailed": {
+    "message": "Could not stitch segment $INDEX$: $ERROR$",
+    "placeholders": {
+      "index": { "content": "$1" },
+      "error": { "content": "$2" }
+    }
+  },
+  "imageConversionFailed": { "message": "Image conversion failed. The image may be too large or the format may be unsupported." },
+  "activeTabNotFound": { "message": "No capturable tab was found" }
 }

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1280, initial-scale=1" />
+  <title>Auto Screenshot Saver — Store Screenshot</title>
+  <link rel="stylesheet" href="showcase.css" />
+</head>
+<body>
+  <main class="canvas" data-view="popup">
+    <header class="brand-bar">
+      <div class="brand-lockup">
+        <img src="../icons/icon128.png" alt="" />
+        <div>
+          <strong>AUTO SCREENSHOT SAVER</strong>
+          <span>LINGUISTWANTSTECH / CACE BUILD</span>
+        </div>
+      </div>
+      <span class="local-badge" data-copy="localBadge">全程本地 · 零上传</span>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow" data-copy="eyebrow">SCHEDULED WEB CAPTURE</p>
+        <h1 data-copy="headline">网页会变化，记录按时留下。</h1>
+        <p class="lede" data-copy="lede">按你的节奏自动截屏，直接保存到本地下载目录。</p>
+        <div class="feature-list" aria-label="Key features">
+          <span><i></i><b data-copy="featureOne">定时自动截屏</b></span>
+          <span><i></i><b data-copy="featureTwo">整页滚动拼接</b></span>
+          <span><i></i><b data-copy="featureThree">PNG · JPEG · WebP</b></span>
+        </div>
+        <p class="privacy-note" data-copy="privacyNote">NO ACCOUNT / NO CLOUD / NO TRACKING</p>
+      </div>
+
+      <div class="product-stage">
+        <div class="browser-window">
+          <div class="browser-toolbar">
+            <div class="traffic" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="address">field-notes.local / archive</div>
+            <img src="../icons/icon48.png" alt="" />
+          </div>
+
+          <div class="browser-content browser-content--popup">
+            <article class="demo-page" aria-hidden="true">
+              <p class="demo-kicker">FIELD NOTES / 08.15</p>
+              <h2>Preserve the state<br />before it changes.</h2>
+              <div class="demo-grid">
+                <div><span>01</span><b>OBSERVE</b><p>Capture the page as it is.</p></div>
+                <div><span>02</span><b>ARCHIVE</b><p>Keep every record local.</p></div>
+                <div><span>03</span><b>COMPARE</b><p>See what changed over time.</p></div>
+              </div>
+              <div class="demo-lines"><i></i><i></i><i></i><i></i></div>
+            </article>
+            <section class="popup-preview" aria-label="Extension popup">
+              <div class="popup-title">
+                <img src="../icons/icon48.png" alt="" />
+                <strong data-ui="extensionName">网页自动截屏助手</strong>
+                <i></i>
+              </div>
+              <div class="popup-row"><span data-ui="enableScheduledCapture">启用定时截屏</span><b class="preview-switch"><i></i></b></div>
+              <div class="popup-row"><span data-ui="intervalMinutes">间隔（分钟）</span><em>10</em></div>
+              <div class="popup-row"><span data-ui="captureScope">截屏范围</span><em data-ui="fullPage">整页滚动</em></div>
+              <div class="popup-row"><span data-ui="imageFormat">图片格式</span><em>PNG</em></div>
+              <button data-ui="captureNow">立即截取当前页</button>
+              <button class="preview-secondary" data-ui="advancedSettings">高级设置</button>
+              <div class="preview-status">
+                <span><small data-ui="statusLabel">状态：</small><b data-ui="running">运行中</b></span>
+                <span><small data-ui="lastCaptureLabel">上次截屏：</small><b data-ui="todayTime">今天 14:30</b></span>
+              </div>
+              <a data-ui="openDownloadFolder">打开下载文件夹</a>
+            </section>
+          </div>
+
+          <div class="browser-content browser-content--options">
+            <section class="options-preview" aria-label="Extension settings">
+              <div class="options-title"><img src="../icons/icon48.png" alt="" /><strong data-ui="advancedSettings">高级设置</strong></div>
+              <p data-ui="optionsIntro">配置网页自动截屏助手的所有选项。修改后请点击保存。</p>
+              <h3 data-ui="basicSection">基本</h3>
+              <div class="option-row"><span data-ui="startWithBrowser">启动浏览器时自动开始</span><i class="checkbox checked">✓</i></div>
+              <div class="option-row"><span data-ui="notifyOnCapture">截屏后显示通知</span><i class="checkbox checked">✓</i></div>
+              <div class="option-row"><span data-ui="captureIntervalMinutes">截屏间隔（分钟）</span><em>10</em></div>
+              <h3 data-ui="scopeSection">范围</h3>
+              <div class="option-row"><span data-ui="captureScope">截屏范围</span><em data-ui="fullPageScrolling">整页长图（滚动拼接）</em></div>
+              <p class="option-hint" data-ui="fullPageHint">整页长图会自动滚动并拼成一张图，适合长文章与聊天记录。</p>
+              <div class="option-row"><span data-ui="onlyActiveTab">仅截取当前激活标签</span><i class="checkbox checked">✓</i></div>
+              <div class="option-row"><span data-ui="skipPinnedTabs">跳过已固定的标签页</span><i class="checkbox"></i></div>
+              <h3 data-ui="fullPageParameters">长图参数</h3>
+              <div class="option-row"><span data-ui="overlapPixels">分段重叠像素</span><em>120</em></div>
+              <p class="option-hint" data-ui="overlapHint">相邻两段重叠的像素数（0–500）。建议 50–200。</p>
+              <div class="option-row"><span data-ui="maxHeightPixels">最大高度（像素）</span><em>30000</em></div>
+              <p class="option-hint" data-ui="maxHeightHint">超过此高度只截顶部，避免超大图导致内存不足。</p>
+              <h3 data-ui="outputSection">输出</h3>
+            </section>
+          </div>
+
+          <div class="browser-content browser-content--result">
+            <article class="source-page" aria-hidden="true">
+              <div class="source-header"><span>FIELD REPORT</span><b>LIVE PAGE</b></div>
+              <h2>One changing page.</h2>
+              <div class="source-copy"><i></i><i></i><i></i><i></i><i></i></div>
+            </article>
+            <div class="capture-flow" aria-hidden="true">
+              <span>SCROLL</span><i>↓</i><span>STITCH</span><i>↓</i><span>SAVE</span>
+            </div>
+            <article class="saved-page" aria-hidden="true">
+              <div class="saved-tag">PNG / LOCAL</div>
+              <div class="saved-header">FULL PAGE ARCHIVE</div>
+              <h3>One complete record.</h3>
+              <div class="saved-copy"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="saved-blocks"><i></i><i></i><i></i></div>
+              <div class="saved-copy"><i></i><i></i><i></i><i></i></div>
+            </article>
+            <div class="saved-toast"><b>✓</b><span data-copy="savedToast">整页长图已保存到本地</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="showcase.js"></script>
+</body>
+</html>

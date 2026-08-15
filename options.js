@@ -32,11 +32,11 @@ async function save() {
     action: 'saveConfig',
     config: { ...current, ...cfg }
   });
-  toast('已保存');
+  toast(msg('savedSettings'));
 }
 
 async function reset() {
-  if (!confirm('确定恢复所有选项为默认值?')) return;
+  if (!confirm(msg('confirmReset'))) return;
   const defaults = {
     enabled: false, intervalMinutes: 5,
     captureMode: 'visible', format: 'png', jpegQuality: 92,
@@ -52,7 +52,7 @@ async function reset() {
     config: { ...current, ...defaults }
   });
   await load();
-  toast('已恢复默认');
+  toast(msg('restoredDefaults'));
 }
 
 function toast(msg) {

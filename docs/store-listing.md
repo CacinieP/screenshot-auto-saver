@@ -1,87 +1,95 @@
-# Chrome Web Store 商店文案(直接复制粘贴)
+# Chrome Web Store 商店文案
+
+> 商店名称由 `manifest.json` 的本地化 `name` 字段生成，请勿在开发者后台追加关键词、竞品名称、徽章或排名描述。
 
 ## 基本信息
 
 | 字段 | 值 |
 |---|---|
-| 类别 | 生产力工具 (Productivity) |
-| 语言 | 中文(简体)+ English(两种都添加,各自填对应文案) |
-| 图形资产 | 128×128 图标已有;截图需 1280×800,建议:① popup 面板 ② 长图截取完成效果 ③ 定时任务运行状态 |
+| 类别 | 生产力工具（Productivity） |
+| 默认语言 | 中文（简体） |
+| 支持语言 | 中文（简体）、English |
+| 中文名称 | `网页自动截屏助手` |
+| English name | `Auto Screenshot Saver` |
+| 官方网站 | `https://github.com/CacinieP/screenshot-auto-saver` |
+| 支持页面 | `https://github.com/CacinieP/screenshot-auto-saver/issues` |
+| 隐私政策 | `https://github.com/CacinieP/screenshot-auto-saver/blob/main/docs/privacy-policy.md` |
 
 ## 中文
 
-**名称**(≤30 字符):
+**简短描述**（与清单一致）：
 
-```
-网页自动截屏助手 - 定时截图/整页长图
-```
-
-**简介**(≤132 字符):
-
-```
-定时自动截取网页并保存到本地,支持整页长图滚动拼接与 PNG/JPEG/WebP,零收集零上传,隐私无忧。
+```text
+定时自动截屏保存 Chrome 网页，支持可见区域与整页长图两种模式
 ```
 
-**详细描述**:
+**详细描述**：
 
-```
-⏱ 定时自动截屏 — 按你设定的间隔自动截取网页(最小 1 分钟),无需守在电脑前。适合监控页面变化、留档、挂机记录。
+```text
+网页自动截屏助手用于按计划或按需截取网页，并将图片直接保存到本地下载目录。
 
-📜 整页长图 — 自动滚动整页并拼接成一张完整长图,长文章、聊天记录一次截全。智能处理固定元素与懒加载图片。
+主要功能：
+• 定时截屏：可设置最短 1 分钟的截屏间隔。
+• 整页长图：自动滚动并拼接长文章、记录页等可滚动内容。
+• 手动截屏：从扩展弹窗立即截取当前页面。
+• 多种格式：支持 PNG、JPEG、WebP，并可调整有损格式质量。
+• 文件命名：支持 {domain}、{title}、{date}、{time}、{path} 模板变量。
+• 标签页范围：可选择当前标签页或全部普通网页标签页，并可跳过固定标签页。
 
-📷 手动截屏 — 弹出面板一键截取当前页,可选可见区域或整页。
+隐私说明：
+截图处理在浏览器本地完成，文件直接写入用户的下载目录。扩展不含账号、广告、统计或追踪代码，也不会把截图上传给开发者或第三方。
 
-🔒 100% 本地,零上传 — 截图直接保存到你的下载目录,无账号、无云端、无统计追踪。我们收集不到你的任何数据。
+部分浏览器内置页面、扩展商店页面和 PDF 查看器等受保护页面不允许扩展截取。
 
-🖼 三种格式 — PNG(无损)/ JPEG(体积小)/ WebP,质量可调。
-
-📂 灵活命名 — 文件名模板支持 {domain} {title} {date} {time} {path},可自定义保存子目录。
-
-🪟 多标签控制 — 仅截当前标签 / 截取全部标签 / 跳过固定标签。
-
-开源:github.com/CacinieP/screenshot-auto-saver(MIT)
+源代码与问题反馈：
+https://github.com/CacinieP/screenshot-auto-saver
 ```
 
 ## English
 
-**Name** (≤30 chars):
+**Summary** (same as the manifest):
 
-```
-Auto Screenshot Saver - Scheduled & Full Page
-```
-
-**Summary** (≤132 chars):
-
-```
-Auto-capture webpages on a schedule and save them locally. Full-page scrolling screenshots, PNG/JPEG/WebP. No tracking, no uploads.
+```text
+Automatically capture webpages on a schedule. Visible-area or full-page scrolling screenshots, saved locally. No tracking, no uploads.
 ```
 
 **Detailed description**:
 
+```text
+Auto Screenshot Saver captures webpages on a schedule or on demand and saves the images directly to your local Downloads folder.
+
+Features:
+• Scheduled capture with intervals starting at one minute.
+• Full-page capture that scrolls and stitches long, scrollable pages.
+• One-click manual capture from the extension popup.
+• PNG, JPEG, and WebP output with adjustable quality for lossy formats.
+• Filename templates using {domain}, {title}, {date}, {time}, and {path}.
+• Capture the active tab or ordinary webpages across all tabs, with an option to skip pinned tabs.
+
+Privacy:
+Screenshot processing happens locally in the browser and files are written directly to the user's Downloads folder. The extension has no account, advertising, analytics, or tracking code, and it does not upload screenshots to the developer or a third party.
+
+Browser-protected pages, Chrome Web Store pages, and some built-in PDF viewers cannot be captured by extensions.
+
+Source code and support:
+https://github.com/CacinieP/screenshot-auto-saver
 ```
-⏱ SCHEDULED CAPTURE — Automatically screenshot webpages at your own interval (from 1 minute). Perfect for monitoring page changes, record-keeping and hands-free documentation — no need to sit at your computer.
 
-📜 FULL-PAGE SCREENSHOTS — Scrolls and stitches the entire page into one tall image. Long articles and chat logs captured completely, with smart handling of sticky elements and lazy-loaded images.
+## 图形素材
 
-📷 MANUAL CAPTURE — One click from the popup: visible area or full page.
+所有图形均为本项目原创或来自开发者本人持有的品牌系统，详见 [`asset-provenance.md`](asset-provenance.md)。
 
-🔒 100% LOCAL, ZERO UPLOADS — Screenshots go straight to your Downloads folder. No account, no cloud, no analytics, no tracking. Your data never leaves your device.
+| 用途 | 文件 |
+|---|---|
+| 商店图标 | `icons/icon128.png`（128×128） |
+| 中文截图 | `store-assets/zh-01-scheduled-capture.png`、`zh-02-full-page-options.png`、`zh-03-full-page-result.png` |
+| English screenshots | `store-assets/en-01-scheduled-capture.png`、`en-02-full-page-options.png`、`en-03-full-page-result.png` |
+| 小型宣传图 | `store-assets/promo-tile.png`（440×280） |
 
-🖼 3 FORMATS — PNG (lossless) / JPEG (small) / WebP, with adjustable quality.
+## 提交流程
 
-📂 FLEXIBLE NAMING — Filename templates support {domain} {title} {date} {time} {path}, plus a custom subfolder under Downloads.
-
-🪟 MULTI-TAB CONTROL — Capture the active tab only, all tabs, or skip pinned tabs.
-
-Open source: github.com/CacinieP/screenshot-auto-saver (MIT)
-```
-
-## 提交步骤(开发者后台)
-
-1. **新建产品 → 上传** `screenshot-auto-saver-v1.0.1.zip`
-2. **商店信息**:粘贴上面文案 + 上传截图,添加中文/英文两种语言
-3. **隐私权**:隐私政策 URL 填
-   `https://github.com/CacinieP/screenshot-auto-saver/blob/main/docs/privacy-policy.md`
-   数据申报按 store-submission.md 第 1 节(全部"不收集");权限说明复制第 2 节
-4. **分发范围**:公开
-5. **提交审核**(`<all_urls>` 权限,审核约数天至数周)
+1. 新建产品并上传 `screenshot-auto-saver-v1.1.0.zip`。
+2. 添加中文（简体）和 English 商店信息，分别使用上面的同语言文案及截图。
+3. 在隐私权页面填写隐私政策 URL、单一用途说明和 [`store-submission.md`](store-submission.md) 中的权限说明。
+4. 选择公开分发，保存草稿并逐项检查预览。
+5. 确认名称、图标、截图与实际功能一致后再提交审核。

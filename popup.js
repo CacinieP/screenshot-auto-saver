@@ -23,16 +23,17 @@ async function load() {
 }
 function applyUI(cfg) {
   enabledEl.classList.toggle('on', !!cfg.enabled);
+  enabledEl.setAttribute('aria-checked', String(!!cfg.enabled));
   dot.classList.toggle('on', !!cfg.enabled);
   intervalEl.value = cfg.intervalMinutes;
   modeEl.value = cfg.captureMode;
   formatEl.value = cfg.format;
 }
 function updateStatus(cfg) {
-  stateText.textContent = cfg.enabled ? '✅ 运行中' : '⏸  未启动';
+  stateText.textContent = cfg.enabled ? msg('running') : msg('notStarted');
   lastTime.textContent = cfg.lastCaptureTime
-    ? new Date(cfg.lastCaptureTime).toLocaleString('zh-CN')
-    : '从未';
+    ? new Date(cfg.lastCaptureTime).toLocaleString(chrome.i18n.getUILanguage())
+    : msg('never');
 }
 async function pushChange() {
   const cfg = {
@@ -48,10 +49,17 @@ async function pushChange() {
   updateStatus(cfg);
 }
 
-enabledEl.addEventListener('click', () => {
+function toggleEnabled() {
   enabledEl.classList.toggle('on');
   dot.classList.toggle('on');
   pushChange();
+}
+
+enabledEl.addEventListener('click', toggleEnabled);
+enabledEl.addEventListener('keydown', (event) => {
+  if (event.key !== ' ' && event.key !== 'Enter') return;
+  event.preventDefault();
+  toggleEnabled();
 });
 intervalEl.addEventListener('change', pushChange);
 modeEl.addEventListener('change', pushChange);
@@ -61,16 +69,16 @@ captureBtn.addEventListener('click', async () => {
   captureBtn.disabled = true;
   const isFull = modeEl.value === 'fullpage';
   const originalText = captureBtn.textContent;
-  captureBtn.textContent = isFull ? '🖼  长图截取中...' : '截取中...';
+  captureBtn.textContent = isFull ? msg('fullPageCapturing') : msg('capturing');
   try {
     const r = await chrome.runtime.sendMessage({ action: 'captureNow' });
-    if (r && !r.ok) throw new Error(r.error || '未知错误');
+    if (r && !r.ok) throw new Error(r.error || msg('unknownError'));
     currentConfig.lastCaptureTime = Date.now();
     updateStatus(currentConfig);
-    captureBtn.textContent = '✓ 已保存';
+    captureBtn.textContent = msg('saved');
     setTimeout(() => { captureBtn.textContent = originalText; }, 1500);
   } catch (e) {
-    alert('❌ 截屏失败: ' + e.message + '\n\n请打开扩展页查看详细日志(chrome://extensions → 详情 → 检查视图)');
+    alert(msg('captureFailed', e.message));
     captureBtn.textContent = originalText;
   } finally {
     captureBtn.disabled = false;

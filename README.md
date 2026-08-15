@@ -14,7 +14,8 @@ Manifest V3 Chrome 扩展,定时自动截取网页,支持**整页长图**(滚动
 - 🪟 **多标签控制** — 仅当前 / 全部 / 跳过固定标签
 - 🎬 **动画暂停** — 长图模式下临时禁用 CSS 动画,避免拼接错位
 - 🧹 **状态还原** — 长图模式下截屏后恢复原滚动位置
-- 🌐 **国际化** — 默认中文
+- 🌐 **完整双语界面** — 根据 Chrome 语言自动显示简体中文或 English
+- 🎨 **Linguist Wants Tech 品牌视觉** — 第一方 C 形捕捉符号与青绿/珊瑚配色
 
 ## 📦 安装
 
@@ -69,10 +70,13 @@ screenshot-auto-saver/
 ├── manifest.json          # MV3 清单(注册 content script)
 ├── background.js          # Service Worker:定时 + 截图 + 拼接 + 下载
 ├── content.js             # Content Script:页面几何/滚动/动画暂停
+├── i18n.js                # 弹窗与设置页本地化辅助
 ├── popup.html / popup.js  # 弹出面板
 ├── options.html / options.js  # 高级设置
-├── _locales/zh_CN/messages.json
-├── icons/{16,48,128}.png
+├── _locales/{zh_CN,en}/messages.json
+├── icons/icon.svg         # 可编辑品牌图标源文件
+├── icons/{16,32,48,128}.png
+├── store-assets/          # 中英文商店截图与宣传图
 └── README.md
 ```
 
@@ -105,5 +109,6 @@ screenshot-auto-saver/
 
 ## 版本
 
+- 1.1.0 — 新增 Linguist Wants Tech 品牌图标、完整中英文界面及原创商店图形素材；补充知识产权来源记录与提交合规清单
 - 1.0.1 — 修复:长图末段压扁/错位、文件名日期时区不一致、多标签截屏后焦点不还原、长图输出未按 retina 分辨率拼接、画布尺寸限制误判导致高页截取失败、图片预加载可能卡死、非法保存路径未过滤
 - 1.0.0 — 初始发布(支持整页长图)
