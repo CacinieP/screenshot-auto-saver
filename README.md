@@ -101,7 +101,7 @@ screenshot-auto-saver/
 
 本项目基于 [MIT](LICENSE) 协议开源,可自由使用、修改和分发。
 
-**隐私承诺**:扩展零收集、零上传——所有截图直接保存到你的本地下载目录,不包含任何统计/广告/追踪代码。详见[隐私政策](https://cacinep.github.io/screenshot-auto-saver/docs/privacy-policy.html)。
+**隐私承诺**:扩展零收集、零上传——所有截图直接保存到你的本地下载目录,不包含任何统计/广告/追踪代码。详见[隐私政策](docs/privacy-policy.md)。
 
 ## 版本
 

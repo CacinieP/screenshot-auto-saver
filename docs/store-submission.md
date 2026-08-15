@@ -36,13 +36,15 @@ storage: Persists user settings only (interval, format, filename
 activeTab: Captures the visible area of the current tab.
 ```
 
-## 3. 隐私政策托管(已选定:仓库公开 + GitHub Pages)
+## 3. 隐私政策托管(已选定:公开仓库 Markdown 页)
 
-仓库已开源,GitHub Pages 已开启,隐私政策地址:
+仓库已开源,隐私政策地址(GitHub 自动渲染,公开可访问):
 
 ```
-https://cacinep.github.io/screenshot-auto-saver/docs/privacy-policy.html
+https://github.com/CacinieP/screenshot-auto-saver/blob/main/docs/privacy-policy.md
 ```
+
+> 注:GitHub Pages 已开启但首次构建一直排队未执行(通常是账号邮箱未验证导致,可在 GitHub Settings → Emails 确认)。若日后 Pages 生效,可改用 `https://caciniep.github.io/screenshot-auto-saver/docs/privacy-policy.html`。
 
 ## 4. 打包上传
 
