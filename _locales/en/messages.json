@@ -1,0 +1,10 @@
+{
+  "extensionName": {
+    "message": "Auto Screenshot Saver",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "Automatically capture webpages on a schedule. Visible-area or full-page scrolling screenshots, saved locally. No tracking, no uploads.",
+    "description": "Extension description"
+  }
+}
