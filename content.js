@@ -90,9 +90,9 @@
   /**
    * 把页面所有图片(包括懒加载的)都强制加载完
    */
-  function preloadImages() {
+  async function preloadImages(timeoutMs = 5000) {
     const imgs = Array.from(document.images || []);
-    return Promise.all(imgs.map(img => {
+    const all = Promise.all(imgs.map(img => {
       if (img.complete && img.naturalHeight !== 0) return Promise.resolve();
       return new Promise(res => {
         img.addEventListener('load', res, { once: true });
@@ -104,6 +104,8 @@
         }
       });
     }));
+    // 个别图片可能永远加载不完,整体设置超时,避免截屏流程卡死
+    await Promise.race([all, new Promise(res => setTimeout(res, timeoutMs))]);
   }
 
   /**

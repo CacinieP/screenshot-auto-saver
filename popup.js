@@ -14,7 +14,9 @@ const folderLink = $('openFolder');
 let currentConfig = {};
 
 async function load() {
-  const { config } = await chrome.runtime.sendMessage({ action: 'getConfig' });
+  const r = await chrome.runtime.sendMessage({ action: 'getConfig' });
+  if (!r || !r.ok || !r.config) return;
+  const config = r.config;
   currentConfig = config;
   applyUI(config);
   updateStatus(config);

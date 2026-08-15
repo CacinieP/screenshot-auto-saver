@@ -83,6 +83,9 @@ async function captureAllTargets() {
     return true;
   });
 
+  // 截屏会临时激活后台标签,记录各窗口原激活标签,结束后还原焦点
+  const originalActiveIds = tabs.filter(t => t.active).map(t => t.id);
+
   for (const tab of targets) {
     try {
       await captureTab(tab, cfg);
@@ -90,6 +93,14 @@ async function captureAllTargets() {
       console.error(`[AutoCapture] 截取 ${tab.url} 失败:`, err);
     }
   }
+
+  for (const id of originalActiveIds) {
+    try {
+      const t = await chrome.tabs.get(id);
+      if (!t.active) await chrome.tabs.update(id, { active: true });
+    } catch { /* 标签可能已被关闭 */ }
+  }
+
   await saveConfig({ ...cfg, lastCaptureTime: Date.now() });
 }
 
@@ -145,7 +156,7 @@ async function captureVisible(tab, cfg) {
     tab.windowId,
     {
       format: cfg.format,
-      quality: cfg.format === 'jpeg' ? cfg.jpegQuality : undefined
+      quality: (cfg.format === 'jpeg' || cfg.format === 'webp') ? cfg.jpegQuality : undefined
     }
   );
   const fileName = buildFileName(tab, cfg, 'visible');
@@ -209,7 +220,12 @@ async function captureFullPage(tab, cfg) {
 
   try {
     const overlap = clamp(cfg.fullPageOverlap, 0, 500);
-    const stepY = Math.max(1, metrics.viewportHeight - overlap);
+    // 重叠不能吞掉整屏:步长至少保留 20% 视口高度,否则逐像素滚动永远截不完
+    const stepY = Math.max(
+      1,
+      metrics.viewportHeight - overlap,
+      Math.round(metrics.viewportHeight * 0.2)
+    );
     const totalH = Math.min(metrics.scrollHeight, cfg.fullPageMaxHeight || 30000);
     const totalW = metrics.viewportWidth;
 
@@ -228,9 +244,13 @@ async function captureFullPage(tab, cfg) {
       const dataUrl = await captureThrottle.exec(tab.windowId, { format: 'png' });
       if (!dataUrl) throw new Error('captureVisibleTab 返回空');
 
-      const realH = Math.min(metrics.viewportHeight, totalH - y);
-      segments.push({ dataUrl, y, h: realH });
-      console.log(`[AutoCapture] 切片 y=${y}, h=${realH}, 累计 ${segments.length}`);
+      // 浏览器会把滚动位置钳制在 maxScroll 以内,以实际位置为准,
+      // 否则最后一段会画到错误位置且被压扁
+      const actualY = Math.floor((r.metrics && r.metrics.scrollY) || y);
+      const realH = Math.min(metrics.viewportHeight, totalH - actualY);
+      if (realH <= 0) break;
+      segments.push({ dataUrl, y: actualY, h: realH });
+      console.log(`[AutoCapture] 切片 y=${actualY}, h=${realH}, 累计 ${segments.length}`);
 
       y += stepY;
       if (segments.length > 300) {
@@ -245,7 +265,10 @@ async function captureFullPage(tab, cfg) {
 
     // 3. 拼接
     console.log(`[AutoCapture] 开始拼接 ${segments.length} 段为 ${totalW}x${totalH} 的图...`);
-    const blob = await stitchSegments(segments, totalW, totalH, cfg);
+    const blob = await stitchSegments(
+      segments, totalW, totalH, cfg,
+      metrics.viewportHeight, metrics.devicePixelRatio
+    );
     console.log(`[AutoCapture] 拼接完成,blob 大小 ${(blob.size / 1024).toFixed(1)} KB`);
 
     // 4. 转 base64 dataURL(SW 内最稳妥的下载方式,避免 object URL 被回收)
@@ -313,30 +336,43 @@ function blobToDataURL(blob) {
 /**
  * 把 segments 拼成一张大图
  */
-async function stitchSegments(segments, totalW, totalH, cfg) {
+async function stitchSegments(segments, totalW, totalH, cfg, viewportH, devicePixelRatio) {
   if (typeof OffscreenCanvas === 'undefined') {
     throw new Error('当前 Chrome 不支持 OffscreenCanvas,无法拼接长图');
   }
 
-  // 限制最大尺寸,避免超出 Chrome convertToBlob 限制(约 16384 或 250MB)
-  const MAX_DIM = 16384;
-  if (totalW > MAX_DIM || totalH > MAX_DIM) {
-    throw new Error(
-      `拼接尺寸 ${totalW}x${totalH} 超过 ${MAX_DIM} 限制,请在高级设置中调小"最大高度",或缩小浏览器窗口宽度`
-    );
+  // Chrome 画布限制:单边最大 65535,总面积约 16384²(2^28 像素)。
+  // 优先按设备像素比输出(retina 更清晰),超限时自动降回 1x。
+  const MAX_SIDE = 65535;
+  const MAX_AREA = 16384 * 16384;
+  const overLimit = (s) =>
+    totalW * s > MAX_SIDE || totalH * s > MAX_SIDE ||
+    totalW * totalH * s * s > MAX_AREA;
+  let scale = devicePixelRatio > 1 ? devicePixelRatio : 1;
+  if (overLimit(scale)) {
+    scale = 1;
+    if (overLimit(1)) {
+      throw new Error(
+        `拼接尺寸 ${totalW}x${totalH} 超过 Chrome 画布限制,请在高级设置中调小"最大高度",或缩小浏览器窗口宽度`
+      );
+    }
   }
 
-  const canvas = new OffscreenCanvas(totalW, totalH);
+  const outW = Math.round(totalW * scale);
+  const outH = Math.round(totalH * scale);
+  const canvas = new OffscreenCanvas(outW, outH);
   const ctx = canvas.getContext('2d');
   ctx.fillStyle = '#ffffff';
-  ctx.fillRect(0, 0, totalW, totalH);
+  ctx.fillRect(0, 0, outW, outH);
 
   for (let i = 0; i < segments.length; i++) {
     const seg = segments[i];
     try {
       const blob = await (await fetch(seg.dataUrl)).blob();
       const bitmap = await createImageBitmap(blob);
-      ctx.drawImage(bitmap, 0, seg.y, totalW, seg.h);
+      // 末段通常不足一个视口:只取源图顶部对应比例,避免整段被压扁
+      const srcH = bitmap.height * (seg.h / viewportH);
+      ctx.drawImage(bitmap, 0, 0, bitmap.width, srcH, 0, seg.y * scale, outW, seg.h * scale);
       bitmap.close && bitmap.close();
       console.log(`[AutoCapture] 拼接段 ${i + 1}/${segments.length}`);
     } catch (err) {
@@ -366,7 +402,14 @@ async function stitchSegments(segments, totalW, totalH, cfg) {
 function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 function joinPath(base, name) {
-  return base ? `${base.replace(/\/$/, '')}/${name}` : name;
+  if (!base) return name;
+  // 过滤非法路径段,避免 chrome.downloads 拒绝绝对路径或含 .. 的路径
+  const safe = String(base)
+    .replace(/\\/g, '/')
+    .split('/')
+    .filter(s => s && s !== '.' && s !== '..')
+    .join('/');
+  return safe ? `${safe}/${name}` : name;
 }
 function buildFileName(tab, cfg, suffix) {
   const url = new URL(tab.url);
@@ -374,7 +417,9 @@ function buildFileName(tab, cfg, suffix) {
   const titleSafe = (tab.title || 'page')
     .replace(/[^a-z0-9\u4e00-\u9fa5]/gi, '_').slice(0, 40);
   const now = new Date();
-  const date = now.toISOString().slice(0, 10);
+  const pad2 = (n) => String(n).padStart(2, '0');
+  // 用本地日期,与 {time}(本地时间)保持一致;toISOString 是 UTC,会差 8 小时
+  const date = `${now.getFullYear()}-${pad2(now.getMonth() + 1)}-${pad2(now.getDate())}`;
   const time = now.toTimeString().slice(0, 8).replace(/:/g, '-');
   const ext = cfg.format === 'jpeg' ? 'jpg' : cfg.format;
   return (cfg.fileNamePattern || '{domain}_{date}_{time}')
@@ -438,6 +483,8 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 });
 
 async function getActiveTab() {
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  // service worker 中 currentWindow 不可靠,应使用 lastFocusedWindow
+  const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+  if (!tab) throw new Error('未找到可截取的标签页');
   return tab;
 }

@@ -20,8 +20,6 @@ Manifest V3 Chrome 扩展,定时自动截取网页,支持**整页长图**(滚动
 
 打开 `chrome://extensions`,开启右上角 **开发者模式**,点击 **加载已解压的扩展程序**,选择 `screenshot-auto-saver/` 文件夹。
 
-也可以使用提供的 zip 包:解压后选择 `screenshot-auto-saver/` 子文件夹加载。
-
 ## 🚀 使用
 
 1. 点击工具栏图标打开弹出面板
@@ -60,7 +58,8 @@ Manifest V3 Chrome 扩展,定时自动截取网页,支持**整页长图**(滚动
 3. background 按 `viewportHeight - overlap` 步长,逐段 `scrollTo`
 4. 每段用 `chrome.tabs.captureVisibleTab` 截屏
 5. 用 `fetch(dataURL) → createImageBitmap → OffscreenCanvas.drawImage` 拼接
-6. `convertToBlob` 得到最终图片 → `URL.createObjectURL` → `chrome.downloads.download` 保存
+6. `convertToBlob` 得到最终图片 → 转 base64 dataURL → `chrome.downloads.download` 保存
+   (不能用 `URL.createObjectURL`,SW 休眠时该 URL 会失效)
 7. 截完后 content script 恢复原滚动位置与样式
 
 ## 📁 文件结构
@@ -98,6 +97,13 @@ screenshot-auto-saver/
 | `scripting` | 注入 content script |
 | `<all_urls>` | 截取所有网站 |
 
+## 📄 开源协议与隐私
+
+本项目基于 [MIT](LICENSE) 协议开源,可自由使用、修改和分发。
+
+**隐私承诺**:扩展零收集、零上传——所有截图直接保存到你的本地下载目录,不包含任何统计/广告/追踪代码。详见[隐私政策](https://cacinep.github.io/screenshot-auto-saver/docs/privacy-policy.html)。
+
 ## 版本
 
-1.0.0 — 初始发布(支持整页长图)
+- 1.0.1 — 修复:长图末段压扁/错位、文件名日期时区不一致、多标签截屏后焦点不还原、长图输出未按 retina 分辨率拼接、画布尺寸限制误判导致高页截取失败、图片预加载可能卡死、非法保存路径未过滤
+- 1.0.0 — 初始发布(支持整页长图)

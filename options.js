@@ -26,6 +26,7 @@ async function save() {
     else if (el.type === 'number') cfg[k] = parseInt(el.value, 10) || 0;
     else cfg[k] = el.value;
   }
+  cfg.intervalMinutes = Math.max(1, cfg.intervalMinutes || 5);
   const { config: current } = await chrome.runtime.sendMessage({ action: 'getConfig' });
   await chrome.runtime.sendMessage({
     action: 'saveConfig',
