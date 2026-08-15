@@ -26,13 +26,13 @@
 32551bc8932c7ec4115e3246c244623fde93e11b528a155825cf2000798ca33a  icons/icon32.png
 76d4e674c87bc377fb02aacf9ed423d920a1d90f854e7e1c7df09edcae74d1ad  icons/icon48.png
 73a85dd92e8994b902a51b26372d5138807c034789af3ad92da407b66e174cbb  icons/icon128.png
-c0894dedc4dcffd3e6e9caed715b7f1058fd818e32780eea42b6200be006af12  store-assets/zh-01-scheduled-capture.png
-6738051dc45922dcb03faaddb0ac1e76b23d7739d8dcf66582e253fec3c3bf9f  store-assets/zh-02-full-page-options.png
-80d87853d5d58e664652a0e598bee09b862799d45ea8e9c40dd303157f686e0d  store-assets/zh-03-full-page-result.png
-970e0d687da8f7c0c7084a5ce0f538945a958ef3eb556ee9d4f829d715df1e44  store-assets/en-01-scheduled-capture.png
-5c562a18df145486d719d5e3f6d28ef80dc145d4e3b58c216ede34529125e5ee  store-assets/en-02-full-page-options.png
-1f9af6471485430492c7221e0e0e9640b8c7457f856d9d5db7090079c35672cd  store-assets/en-03-full-page-result.png
-05f41a860e1c514ba4fad154121db003c8a11b19b63fb8270ab3e51cf29947df  store-assets/promo-tile.svg
+5324e8162bc07fa6c079781bea2f3c1113845052c6b8770fa548fbb367fd32c1  store-assets/zh-01-scheduled-capture.png
+90a51fc7ba95eeb18a7a7ef88f5832efb51c97e0b41a727050df549b819a91e5  store-assets/zh-02-full-page-options.png
+c6206ffa2603cbb7368471bf65187b14e75e615edbc8f0e905523725bbb7ebb4  store-assets/zh-03-full-page-result.png
+cb811e490fbec3d8df80c75475bb96c7b0a158bfd9ee3ea2e603b19855883191  store-assets/en-01-scheduled-capture.png
+08dc044326483210069f6d036dfe34062b03ef25b7f5b6393ee8b5efb8b67395  store-assets/en-02-full-page-options.png
+1c0d6e2d94e768e8c31dfc4c9f4492ae154841b048644b05933a4faf27a4deac  store-assets/en-03-full-page-result.png
+dd9c93501211ff4c42e1e4b696a938027b4ea75da03c83733a52517df59f07d5  store-assets/promo-tile.svg
 c2b0fa88f977239cf2e21f146bda832360c85c38f78f7d8de3646ac8034e025b  store-assets/promo-tile.png
 ```
 

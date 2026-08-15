@@ -1,6 +1,6 @@
 {
-  "extensionName": { "message": "网页自动截屏助手", "description": "扩展名称" },
-  "extensionShortName": { "message": "自动截屏", "description": "空间不足时显示的短名称" },
+  "extensionName": { "message": "LWT 网页截屏助手", "description": "扩展名称" },
+  "extensionShortName": { "message": "LWT 截屏", "description": "空间不足时显示的短名称" },
   "extensionDescription": { "message": "定时自动截屏保存 Chrome 网页，支持可见区域与整页长图两种模式", "description": "扩展描述" },
   "enableScheduledCapture": { "message": "启用定时截屏" },
   "intervalMinutes": { "message": "间隔（分钟）" },
@@ -26,8 +26,8 @@
     "message": "截屏失败：$ERROR$\n\n请打开扩展页查看详细日志（chrome://extensions → 详情 → 检查视图）。",
     "placeholders": { "error": { "content": "$1" } }
   },
-  "optionsDocumentTitle": { "message": "高级设置 - 网页自动截屏助手" },
-  "optionsIntro": { "message": "配置网页自动截屏助手的所有选项。修改后请点击保存。" },
+  "optionsDocumentTitle": { "message": "高级设置 - LWT 网页截屏助手" },
+  "optionsIntro": { "message": "配置 LWT 网页截屏助手的所有选项。修改后请点击保存。" },
   "basicSection": { "message": "基本" },
   "startWithBrowser": { "message": "启动浏览器时自动开始" },
   "notifyOnCapture": { "message": "截屏后显示通知" },

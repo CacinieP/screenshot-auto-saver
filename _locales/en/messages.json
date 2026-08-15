@@ -1,6 +1,6 @@
 {
-  "extensionName": { "message": "Auto Screenshot Saver", "description": "Extension name" },
-  "extensionShortName": { "message": "Auto Capture", "description": "Short name shown when space is limited" },
+  "extensionName": { "message": "LWT Screenshot Saver", "description": "Extension name" },
+  "extensionShortName": { "message": "LWT Capture", "description": "Short name shown when space is limited" },
   "extensionDescription": { "message": "Automatically capture webpages on a schedule. Visible-area or full-page scrolling screenshots, saved locally. No tracking, no uploads.", "description": "Extension description" },
   "enableScheduledCapture": { "message": "Enable scheduled capture" },
   "intervalMinutes": { "message": "Interval (minutes)" },
@@ -26,8 +26,8 @@
     "message": "Screenshot failed: $ERROR$\n\nOpen the extension page for details (chrome://extensions → Details → Inspect views).",
     "placeholders": { "error": { "content": "$1" } }
   },
-  "optionsDocumentTitle": { "message": "Advanced settings - Auto Screenshot Saver" },
-  "optionsIntro": { "message": "Configure every Auto Screenshot Saver option. Select Save when you are finished." },
+  "optionsDocumentTitle": { "message": "Advanced settings - LWT Screenshot Saver" },
+  "optionsIntro": { "message": "Configure every LWT Screenshot Saver option. Select Save when you are finished." },
   "basicSection": { "message": "Basics" },
   "startWithBrowser": { "message": "Start automatically with Chrome" },
   "notifyOnCapture": { "message": "Show a notification after capture" },

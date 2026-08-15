@@ -69,7 +69,7 @@ const pageCopy = {
 
 const uiCopy = {
   zh_CN: {
-    extensionName: '网页自动截屏助手',
+    extensionName: 'LWT 网页截屏助手',
     enableScheduledCapture: '启用定时截屏',
     intervalMinutes: '间隔（分钟）',
     captureIntervalMinutes: '截屏间隔（分钟）',
@@ -84,7 +84,7 @@ const uiCopy = {
     lastCaptureLabel: '上次截屏：',
     todayTime: '今天 14:30',
     openDownloadFolder: '打开下载文件夹',
-    optionsIntro: '配置网页自动截屏助手的所有选项。修改后请点击保存。',
+    optionsIntro: '配置 LWT 网页截屏助手的所有选项。修改后请点击保存。',
     basicSection: '基本',
     startWithBrowser: '启动浏览器时自动开始',
     notifyOnCapture: '截屏后显示通知',
@@ -100,7 +100,7 @@ const uiCopy = {
     outputSection: '输出'
   },
   en: {
-    extensionName: 'Auto Screenshot Saver',
+    extensionName: 'LWT Screenshot Saver',
     enableScheduledCapture: 'Enable scheduled capture',
     intervalMinutes: 'Interval (minutes)',
     captureIntervalMinutes: 'Capture interval (minutes)',
@@ -115,7 +115,7 @@ const uiCopy = {
     lastCaptureLabel: 'Last capture:',
     todayTime: 'Today, 14:30',
     openDownloadFolder: 'Open Downloads folder',
-    optionsIntro: 'Configure every Auto Screenshot Saver option. Select Save when you are finished.',
+    optionsIntro: 'Configure every LWT Screenshot Saver option. Select Save when you are finished.',
     basicSection: 'Basics',
     startWithBrowser: 'Start automatically with Chrome',
     notifyOnCapture: 'Show a notification after capture',

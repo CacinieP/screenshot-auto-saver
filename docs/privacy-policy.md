@@ -1,4 +1,4 @@
-# 隐私政策 / Privacy Policy — 网页自动截屏助手 (Auto Screenshot Saver)
+# 隐私政策 / Privacy Policy — LWT 网页截屏助手 (LWT Screenshot Saver)
 
 > 最后更新 / Last updated: 2026-08-15
 
@@ -6,7 +6,7 @@
 
 ## 中文版
 
-「网页自动截屏助手」(以下简称"本扩展")是一款 Chrome 浏览器扩展,用于定时或手动截取网页截图并保存到您的电脑。**本扩展不收集、不传输、不出售任何用户数据。**
+「LWT 网页截屏助手」(以下简称"本扩展")是一款 Chrome 浏览器扩展,用于定时或手动截取网页截图并保存到您的电脑。**本扩展不收集、不传输、不出售任何用户数据。**
 
 ### 1. 我们收集哪些数据
 
@@ -47,7 +47,7 @@
 
 ## English Version
 
-Auto Screenshot Saver ("the extension") is a Chrome browser extension that captures webpage screenshots on a schedule or on demand and saves them to your computer. **The extension collects, transmits, and sells no user data whatsoever.**
+LWT Screenshot Saver ("the extension") is a Chrome browser extension that captures webpage screenshots on a schedule or on demand and saves them to your computer. **The extension collects, transmits, and sells no user data whatsoever.**
 
 ### 1. Data We Collect
 

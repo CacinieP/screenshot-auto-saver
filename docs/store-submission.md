@@ -54,7 +54,7 @@ activeTab: Captures the visible area of the current user-selected tab.
 本次已验证上传包：
 
 ```text
-f25a05e3f1fc0bc322a9ce234310fec3b2aa7e68836f689a51ba53f9c3356b1c  screenshot-auto-saver-v1.1.0.zip
+e9fa5cda80964c65d9f9e00acb7f508a10eb62e14ff656639434cb9fcd288d6b  screenshot-auto-saver-v1.1.0.zip
 ```
 
 重新打包会更新 ZIP 内文件时间，因此提交前若再次运行脚本，应重新计算并保存 SHA-256。

@@ -9,8 +9,8 @@
 | 类别 | 生产力工具（Productivity） |
 | 默认语言 | 中文（简体） |
 | 支持语言 | 中文（简体）、English |
-| 中文名称 | `网页自动截屏助手` |
-| English name | `Auto Screenshot Saver` |
+| 中文名称 | `LWT 网页截屏助手` |
+| English name | `LWT Screenshot Saver` |
 | 官方网站 | `https://github.com/CacinieP/screenshot-auto-saver` |
 | 支持页面 | `https://github.com/CacinieP/screenshot-auto-saver/issues` |
 | 隐私政策 | `https://github.com/CacinieP/screenshot-auto-saver/blob/main/docs/privacy-policy.md` |
@@ -26,7 +26,7 @@
 **详细描述**：
 
 ```text
-网页自动截屏助手用于按计划或按需截取网页，并将图片直接保存到本地下载目录。
+LWT 网页截屏助手用于按计划或按需截取网页，并将图片直接保存到本地下载目录。
 
 主要功能：
 • 定时截屏：可设置最短 1 分钟的截屏间隔。
@@ -56,7 +56,7 @@ Automatically capture webpages on a schedule. Visible-area or full-page scrollin
 **Detailed description**:
 
 ```text
-Auto Screenshot Saver captures webpages on a schedule or on demand and saves the images directly to your local Downloads folder.
+LWT Screenshot Saver captures webpages on a schedule or on demand and saves the images directly to your local Downloads folder.
 
 Features:
 • Scheduled capture with intervals starting at one minute.
